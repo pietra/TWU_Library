@@ -3,8 +3,6 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.twu.biblioteca.BibliotecaApp.LibraryDatabase;
-
 public class BibliotecaAppUI {
     public static void WelcomeMessage() {
         System.out.println("*************************************");
@@ -34,9 +32,33 @@ public class BibliotecaAppUI {
         System.out.println("Do you wanna checkout a book? Type its name: ");
     }
 
+    public static void CheckoutBookSuccess(String bookName) {
+        System.out.println();
+        System.out.println("Congratulations! You checked out " + bookName + ".");
+    }
+
+    public static void CheckoutBookFail(String bookName) {
+        System.out.println();
+        System.out.println("Oh, no! " + bookName + " isn't available.");
+    }
+
     public static void ReturnBookMessage() {
         System.out.println();
         System.out.println("Do you wanna return a book? Type its name: ");
+    }
+
+    public static void ReturnBookSuccess(String bookName) {
+        System.out.println();
+        System.out.println("Nice! You returned " + bookName + ".");
+    }
+
+    public static void ReturnBookFail(String bookName) {
+        System.out.println();
+        System.out.println("What? " + bookName + " was already available.");
+    }
+
+    public static void QuitMessage() {
+        System.out.println("Goodbye! See you soon!");
     }
 
     public static int ReadInteger() {
@@ -46,11 +68,10 @@ public class BibliotecaAppUI {
 
     public static String ReadBookName() {
         Scanner book = new Scanner(System.in);
-        return book.next();
+        return book.nextLine();
     }
 
     public static void ListBooks(ArrayList<Book> books) {
-        BibliotecaAppUI.ListBooksMessage();
         for (Book book : books) {
             if (book.getAvailable()) {
                 System.out.print(book.getName() + " | ");

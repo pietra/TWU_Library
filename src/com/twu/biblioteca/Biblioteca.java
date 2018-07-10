@@ -4,28 +4,32 @@ import java.util.ArrayList;
 
 public class Biblioteca {
 
-    private static ArrayList<Book> books = new ArrayList();
-
-    public static ArrayList<Book> getBooks() {
-        return books;
-    }
-
     Biblioteca() {
         InitializingLibraryDatabase();
     }
 
-    public void CheckoutBook(String bookName) {
+    private ArrayList<Book> books = new ArrayList();
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public Boolean CheckoutBook(String bookName) {
         Book book = FindBookByName(bookName);
         if (book.getAvailable()) {
             book.setAvailable(false);
-            System.out.println("Congratulation! You checked out " + book.getName() + ".");
+            return true;
         } else
-            System.out.println("Oh, no! " + book.getName() + " isn't available.");
+            return false;
     }
 
-    public void ReturnBook(String bookName) {
+    public Boolean ReturnBook(String bookName) {
         Book book = FindBookByName(bookName);
-        // TODO
+        if (!book.getAvailable()) {
+            book.setAvailable(true);
+            return true;
+        } else
+            return false;
     }
 
     public void InitializingLibraryDatabase() {
@@ -39,15 +43,17 @@ public class Biblioteca {
         books.add(book3);
     }
 
-    private Book FindBookByName(String name) {
-        Book bookWanted = new Book();
+    public Book FindBookByName(String name) {
         for (Book book : books) {
             if (book.getName().equals(name)) {
-                bookWanted = book;
-                break;
+                return book;
             }
         }
-        return bookWanted;
+        return null;
+    }
+
+    public void AddBook(Book book) {
+        books.add(book);
     }
 
 }

@@ -14,6 +14,9 @@ public class Book {
         available = true;
     }
 
+    Book() {
+    }
+
     public String getName() {
         return name;
     }
@@ -38,8 +41,8 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
+    public Boolean getAvailable() { return available; }
+
+    public void setAvailable(Boolean available) { this.available = available; }
 
 }

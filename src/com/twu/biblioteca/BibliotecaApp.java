@@ -1,50 +1,50 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BibliotecaApp {
 
-    private static ArrayList<Book> LibraryDatabase = new ArrayList();
+    public static ArrayList<Book> LibraryDatabase = new ArrayList();
     private static Boolean available = true;
+    private static Map<Integer, Runnable> options = new HashMap<>();
 
     public static void main(String[] args) {
         InitializingLibraryDatabase();
-        WelcomeMessage();
+        InitializingMenu();
+        BibliotecaAppUI.WelcomeMessage();
         Menu();
     }
 
     private static void Menu() {
         while (available) {
-            MenuMessage();
-            int read = ReadInteger();
-            switch (read) {
-                case 1: {
-                    ListBooks();
-                }
-                break;
-                case 13: {
-                    Quit();
-                }
-                break;
-                default: {
-                    System.out.println("Ops, option not found.");
-                }
-                break;
-            }
+            BibliotecaAppUI.MenuMessage();
+            int read = BibliotecaAppUI.ReadInteger();
+            options.get(read).run();
         }
-
     }
 
-    private static void ListBooks() {
-        ListBooksMessage();
-        for (Book book : LibraryDatabase) {
-            if (book.getAvailable()) {
-                System.out.println(book.getName() + " | ");
-                System.out.print(book.getAuthor() + " | ");
-                System.out.print(book.getYearPublished() + " | ");
-            }
-        }
+    public static void TryToReturnBook() {
+        BibliotecaAppUI.ReturnBookMessage();
+        String bookName = BibliotecaAppUI.ReadBookName();
+        Book book = FindBookByName(bookName);
+        //ReturnBook(book);
+    }
+
+    public static void TryToCheckoutBook() {
+        BibliotecaAppUI.CheckoutBookMessage();
+        String bookName = BibliotecaAppUI.ReadBookName();
+        Book book = FindBookByName(bookName);
+        CheckoutBook(book);
+    }
+
+    public static void CheckoutBook(Book book) {
+        if (book.getAvailable()) {
+            book.setAvailable(false);
+            System.out.println("Congratulation! You checked out " + book.getName() + ".");
+        } else
+            System.out.println("Oh, no! " + book.getName() + " isn't available.");
     }
 
     private static void Quit() {
@@ -52,30 +52,16 @@ public class BibliotecaApp {
         System.out.println("Goodbye! See you soon!");
     }
 
-    public static int ReadInteger() {
-        Scanner number = new Scanner(System.in);
-        return number.nextInt();
-    }
+    public static Book FindBookByName(String name) {
+        Book bookWanted = new Book();
+        for (Book book : LibraryDatabase) {
+            if (book.getName().equals(name)) {
+                bookWanted = book;
+                break;
+            }
 
-    private static void WelcomeMessage() {
-        System.out.println("*************************************");
-        System.out.println("************* Welcome to ************");
-        System.out.println("***** Library Management System *****");
-        System.out.println("** of The Bangalore Public Library **");
-        System.out.println("*************************************");
-    }
-
-    private static void MenuMessage() {
-        System.out.println();
-        System.out.println("************ Menu Options ***********");
-        System.out.println("            List Books - 1           ");
-        System.out.println("              Quit - 13              ");
-        System.out.println("*************************************");
-    }
-
-    private static void ListBooksMessage() {
-        System.out.println();
-        System.out.println("List of books");
+        }
+        return bookWanted;
     }
 
     public static void InitializingLibraryDatabase() {
@@ -87,6 +73,13 @@ public class BibliotecaApp {
 
         Book book3 = new Book("Implementation Patterns", "Kent Beck", 2007);
         LibraryDatabase.add(book3);
+    }
+
+    private static void InitializingMenu() {
+        options.put(1, () -> BibliotecaAppUI.ListBooks(LibraryDatabase));
+        options.put(2, () -> TryToCheckoutBook());
+        options.put(3, () -> TryToReturnBook());
+        options.put(13, () -> Quit());
     }
 
 }

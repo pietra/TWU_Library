@@ -21,8 +21,18 @@ public class BibliotecaApp {
         while (available) {
             BibliotecaAppUI.MenuMessage();
             int read = BibliotecaAppUI.ReadInteger();
-            options.get(read).run();
+            RunMenuOption(read);
         }
+    }
+
+    private static void RunMenuOption(int read) {
+        options.get(read).run();
+    }
+
+    private static void ListBooks() {
+        ArrayList<Book> books = biblioteca.getBooks();
+        BibliotecaAppUI.ListBooksMessage();
+        BibliotecaAppUI.ListBooks(books);
     }
 
     private static void TryToCheckoutBook() {
@@ -52,12 +62,6 @@ public class BibliotecaApp {
         } catch (IOException ex) {
             System.out.println("We don't have this book.");
         }
-    }
-
-    private static void ListBooks() {
-        ArrayList<Book> books = biblioteca.getBooks();
-        BibliotecaAppUI.ListBooksMessage();
-        BibliotecaAppUI.ListBooks(books);
     }
 
     private static void Quit() {

@@ -12,17 +12,17 @@ import static org.junit.Assert.*;
 public class BibliotecaTest {
 
     private Biblioteca biblioteca;
-    Book book;
+    private Book book;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         biblioteca = new Biblioteca();
         book = new Book("Test", "Tester", 1996);
         biblioteca.AddBook(book);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test

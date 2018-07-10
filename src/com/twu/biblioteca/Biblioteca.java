@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class Biblioteca {
 
+    private ArrayList<Book> books = new ArrayList();
+
     Biblioteca() {
         InitializingLibraryDatabase();
     }
-
-    private ArrayList<Book> books = new ArrayList();
 
     public ArrayList<Book> getBooks() {
         return books;

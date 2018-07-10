@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,23 +26,32 @@ public class BibliotecaApp {
     }
 
     private static void TryToCheckoutBook() {
-        BibliotecaAppUI.CheckoutBookMessage();
-        String bookName = BibliotecaAppUI.ReadBookName();
-        Boolean success = biblioteca.CheckoutBook(bookName);
-        if (success)
-            BibliotecaAppUI.CheckoutBookSuccess(bookName);
-        else
-            BibliotecaAppUI.CheckoutBookFail(bookName);
+        try {
+            BibliotecaAppUI.CheckoutBookMessage();
+            String bookName = BibliotecaAppUI.ReadBookName();
+            Boolean success = biblioteca.CheckoutBook(bookName);
+            if (success)
+                BibliotecaAppUI.CheckoutBookSuccess(bookName);
+            else
+                BibliotecaAppUI.CheckoutBookFail(bookName);
+        } catch (IOException ex) {
+            System.out.println("We don't have this book.");
+        }
+
     }
 
     private static void TryToReturnBook() {
-        BibliotecaAppUI.ReturnBookMessage();
-        String bookName = BibliotecaAppUI.ReadBookName();
-        Boolean success = biblioteca.ReturnBook(bookName);
-        if (success)
-            BibliotecaAppUI.ReturnBookSuccess(bookName);
-        else
-            BibliotecaAppUI.ReturnBookFail(bookName);
+        try {
+            BibliotecaAppUI.ReturnBookMessage();
+            String bookName = BibliotecaAppUI.ReadBookName();
+            Boolean success = biblioteca.ReturnBook(bookName);
+            if (success)
+                BibliotecaAppUI.ReturnBookSuccess(bookName);
+            else
+                BibliotecaAppUI.ReturnBookFail(bookName);
+        } catch (IOException ex) {
+            System.out.println("We don't have this book.");
+        }
     }
 
     private static void ListBooks() {

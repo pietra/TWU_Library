@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Biblioteca {
@@ -14,22 +15,43 @@ public class Biblioteca {
         return books;
     }
 
-    public Boolean CheckoutBook(String bookName) {
-        Book book = FindBookByName(bookName);
-        if (book.getAvailable()) {
-            book.setAvailable(false);
-            return true;
-        } else
-            return false;
+    public Boolean CheckoutBook(String bookName) throws IOException {
+        try {
+            Book book = FindBookByName(bookName);
+            if (book.getAvailable()) {
+                book.setAvailable(false);
+                return true;
+            } else
+                return false;
+        } catch (IOException ex) {
+            throw ex;
+        }
     }
 
-    public Boolean ReturnBook(String bookName) {
-        Book book = FindBookByName(bookName);
-        if (!book.getAvailable()) {
-            book.setAvailable(true);
-            return true;
-        } else
-            return false;
+    public Boolean ReturnBook(String bookName) throws IOException {
+        try {
+            Book book = FindBookByName(bookName);
+            if (!book.getAvailable()) {
+                book.setAvailable(true);
+                return true;
+            } else
+                return false;
+        } catch (IOException ex) {
+            throw ex;
+        }
+    }
+
+    public Book FindBookByName(String name) throws IOException {
+        for (Book book : books) {
+            if (book.getName().equals(name)) {
+                return book;
+            }
+        }
+        throw new IOException("We don't have this book.");
+    }
+
+    public void AddBook(Book book) {
+        books.add(book);
     }
 
     public void InitializingLibraryDatabase() {
@@ -41,19 +63,6 @@ public class Biblioteca {
 
         Book book3 = new Book("Implementation Patterns", "Kent Beck", 2007);
         books.add(book3);
-    }
-
-    public Book FindBookByName(String name) {
-        for (Book book : books) {
-            if (book.getName().equals(name)) {
-                return book;
-            }
-        }
-        return null;
-    }
-
-    public void AddBook(Book book) {
-        books.add(book);
     }
 
 }

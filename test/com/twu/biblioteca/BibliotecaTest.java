@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class BibliotecaTest {
@@ -24,24 +26,24 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void FindBookTest() {
+    public void FindBookTestByItsName() throws IOException {
         Book book = biblioteca.FindBookByName("Test");
         assertEquals(this.book, book);
     }
 
-    @Test//(expected = ClassNotFoundException.class)
-    public void FindBookTest2ThrowsException() {
+    @Test(expected = IOException.class)
+    public void FindBookTest2ByItsNameThrowsException() throws IOException {
         Book book = biblioteca.FindBookByName("Test2");
     }
 
     @Test
-    public void CheckoutBookTest() {
+    public void CheckoutBookTest() throws IOException {
         biblioteca.CheckoutBook("Test");
         Assert.assertFalse(book.getAvailable());
     }
 
     @Test
-    public void ReturnBookTest() {
+    public void ReturnBookTest() throws IOException {
         book.setAvailable(false);
         biblioteca.ReturnBook("Test");
         Assert.assertTrue(book.getAvailable());

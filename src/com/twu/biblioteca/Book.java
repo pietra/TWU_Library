@@ -26,12 +26,8 @@ public class Book {
         return yearPublished;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
+    public Boolean getAvailable() { return available; }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
+    public void setAvailable(Boolean available) { this.available = available; }
 
 }

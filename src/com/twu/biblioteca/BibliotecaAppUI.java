@@ -28,74 +28,60 @@ public class BibliotecaAppUI {
     /* Book operations messages */
 
     public static void ListBooksMessage() {
-        System.out.println();
         System.out.println("List of books");
     }
 
     public static void CheckoutBookMessage() {
-        System.out.println();
         System.out.println("Do you wanna checkout a book? Type its name: ");
     }
 
     public static void CheckoutBookSuccess(String bookName) {
-        System.out.println();
         System.out.println("Congratulations! You checked out " + bookName + ".");
     }
 
     public static void CheckoutBookFail(String bookName) {
-        System.out.println();
         System.out.println("Oh, no! " + bookName + " isn't available.");
     }
 
     public static void ReturnBookMessage() {
-        System.out.println();
         System.out.println("Do you wanna return a book? Type its name: ");
     }
 
     public static void ReturnBookSuccess(String bookName) {
-        System.out.println();
         System.out.println("Nice! You returned " + bookName + ".");
     }
 
     public static void ReturnBookFail(String bookName) {
-        System.out.println();
         System.out.println("What? " + bookName + " was already available.");
     }
 
     /* Movie operations messages */
 
     public static void ListMoviesMessage() {
-        System.out.println();
         System.out.println("List of movies");
     }
 
     public static void CheckoutMovieMessage() {
-        System.out.println();
         System.out.println("Do you wanna checkout a movie? Type its name: ");
     }
 
     public static void CheckoutMovieSuccess(String movieName) {
-        System.out.println();
         System.out.println("Congratulations! You checked out " + movieName + ".");
     }
 
     public static void CheckoutMovieFail(String movieName) {
-        System.out.println();
         System.out.println("Oh, no! " + movieName + " isn't available.");
     }
 
     public static void ReturnMovieMessage() {
-        System.out.println();
         System.out.println("Do you wanna return a movie? Type its name: ");
     }
 
     public static void ReturnMovieSuccess(String movieName) {
-        System.out.println();
         System.out.println("Nice! You returned " + movieName + ".");
     }
 
     public static void ReturnMovieFail(String movieName) {
-        System.out.println();
         System.out.println("What? " + movieName + " was already available.");
     }
 

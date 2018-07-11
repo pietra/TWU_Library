@@ -53,7 +53,6 @@ public class BibliotecaApp {
         } catch (IOException ex) {
             System.out.println("We don't have this book.");
         }
-
     }
 
     private static void TryToCheckoutMovie() {
@@ -68,7 +67,6 @@ public class BibliotecaApp {
         } catch (IOException ex) {
             System.out.println("We don't have this movie.");
         }
-
     }
 
     private static void TryToReturnBook() {

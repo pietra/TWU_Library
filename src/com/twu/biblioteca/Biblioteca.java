@@ -6,13 +6,19 @@ import java.util.ArrayList;
 public class Biblioteca {
 
     private ArrayList<Book> books = new ArrayList();
+    private ArrayList<Movie> movies = new ArrayList<>();
 
     Biblioteca() {
-        InitializingLibraryDatabase();
+        InitializingLibraryBooks();
+        InitializingLibraryMovies();
     }
 
     public ArrayList<Book> getBooks() {
         return books;
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
     }
 
     public Boolean CheckoutBook(String bookName) throws IOException {
@@ -26,6 +32,10 @@ public class Biblioteca {
         } catch (IOException ex) {
             throw ex;
         }
+    }
+
+    public Boolean CheckoutMovie(String bookName) {
+        return false;
     }
 
     public Boolean ReturnBook(String bookName) throws IOException {
@@ -50,11 +60,25 @@ public class Biblioteca {
         throw new IOException("We don't have this book.");
     }
 
+    public Movie FindMovieByName(String name) throws IOException {
+        for (Movie movie : movies) {
+            if (movie.getName().equals(name)) {
+                return movie;
+            }
+        }
+        throw new IOException("We don't have this movie.");
+    }
+
+
     public void AddBook(Book book) {
         books.add(book);
     }
 
-    public void InitializingLibraryDatabase() {
+    public void AddMovie(Movie movie) {
+        movies.add(movie);
+    }
+
+    public void InitializingLibraryBooks() {
         Book book1 = new Book("Test-Driven Development by example", "Kent Beck", 2000);
         books.add(book1);
 
@@ -63,6 +87,17 @@ public class Biblioteca {
 
         Book book3 = new Book("Implementation Patterns", "Kent Beck", 2007);
         books.add(book3);
+    }
+
+    public void InitializingLibraryMovies() {
+        Movie movie1 = new Movie("Godfather", "Francis Coppola", 1972, 8);
+        movies.add(movie1);
+
+        Movie movie2 = new Movie("Thelma & Louise", "Ridley Scott", 1991, 8);
+        movies.add(movie2);
+
+        Movie movie3 = new Movie("Lua de Cristal", "Tizuka Yamasaki", 1990, 10);
+        movies.add(movie3);
     }
 
 }

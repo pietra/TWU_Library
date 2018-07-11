@@ -13,12 +13,18 @@ public class BibliotecaTest {
 
     private Biblioteca biblioteca;
     private Book book;
+    private Movie movie;
 
     @Before
     public void setUp() {
         biblioteca = new Biblioteca();
+
         book = new Book("Test", "Tester", 1996);
         biblioteca.AddBook(book);
+
+        movie = new Movie("Test", "Tester", 1996, 0);
+        biblioteca.AddMovie(movie);
+
     }
 
     @After
@@ -37,10 +43,27 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void FindMovieTestByItsName() throws IOException {
+        Movie movie = biblioteca.FindMovieByName("Test");
+        assertEquals(this.movie, movie);
+    }
+
+    @Test(expected = IOException.class)
+    public void FindMovieTest2ByItsNameThrowsException() throws IOException {
+        Movie movie = biblioteca.FindMovieByName("Test2");
+    }
+
+    @Test
     public void CheckoutBookTest() throws IOException {
         biblioteca.CheckoutBook("Test");
         Assert.assertFalse(book.getAvailable());
     }
+
+    /*@Test
+    public void CheckoutMovieTest() {
+        biblioteca.CheckoutMovie("Test");
+        Assert.assertFalse(movie.getAvailable());
+    }*/
 
     @Test
     public void ReturnBookTest() throws IOException {

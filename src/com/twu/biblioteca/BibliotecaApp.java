@@ -20,13 +20,13 @@ public class BibliotecaApp {
     private static void Menu() {
         while (available) {
             BibliotecaAppUI.MenuMessage();
-            int read = BibliotecaAppUI.ReadInteger();
-            RunMenuOption(read);
+            int option = BibliotecaAppUI.ReadInteger();
+            RunMenuOption(option);
         }
     }
 
-    private static void RunMenuOption(int read) {
-        options.get(read).run();
+    private static void RunMenuOption(int option) {
+        options.get(option).run();
     }
 
     private static void ListBooks() {

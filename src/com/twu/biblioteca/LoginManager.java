@@ -15,6 +15,16 @@ public class LoginManager {
         users.add(user);
     }
 
+    public void Login(String libraryNumber, String password) throws IOException {
+        User user = FindUserByLibraryNumber(libraryNumber);
+        CheckLogin(user.getPassword(), password);
+    }
+
+    private void CheckLogin(String password, String passwordGiven) throws IOException {
+        if (!password.equals(passwordGiven))
+            throw new IOException();
+    }
+
     public User FindUserByLibraryNumber(String libraryNumber) throws IOException {
         for (User user : users) {
             if (user.getLibraryNumber().equals(libraryNumber)) {

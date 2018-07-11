@@ -26,14 +26,24 @@ public class LoginManagerTest {
     }
 
     @Test
-    public void findUserByLibraryNumber() throws IOException {
+    public void FindUserByLibraryNumber() throws IOException {
         User user = loginManager.FindUserByLibraryNumber(user1.getLibraryNumber());
         Assert.assertEquals(user1, user);
     }
 
     @Test(expected = IOException.class)
-    public void findUserByLibraryNumberThrowsException() throws IOException {
+    public void FindUserByLibraryNumberThrowsException() throws IOException {
         User user = loginManager.FindUserByLibraryNumber("000-0004");
+    }
+
+    @Test
+    public void LoginWithUser() throws IOException {
+        loginManager.Login(user1.getLibraryNumber(), user1.getPassword());
+    }
+
+    @Test(expected = IOException.class)
+    public void LoginWithUserThrowsException() throws IOException {
+        loginManager.Login(user1.getLibraryNumber(), "wrongpassword");
     }
 
 }

@@ -59,17 +59,24 @@ public class BibliotecaTest {
         Assert.assertFalse(book.getAvailable());
     }
 
-    /*@Test
-    public void CheckoutMovieTest() {
+    @Test
+    public void CheckoutMovieTest() throws IOException {
         biblioteca.CheckoutMovie("Test");
         Assert.assertFalse(movie.getAvailable());
-    }*/
+    }
 
     @Test
     public void ReturnBookTest() throws IOException {
         book.setAvailable(false);
         biblioteca.ReturnBook("Test");
         Assert.assertTrue(book.getAvailable());
+    }
+
+    @Test
+    public void ReturnMovieTest() throws IOException {
+        movie.setAvailable(false);
+        biblioteca.ReturnMovie("Test");
+        Assert.assertTrue(movie.getAvailable());
     }
 
 }

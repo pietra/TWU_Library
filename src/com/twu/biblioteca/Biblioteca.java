@@ -34,8 +34,17 @@ public class Biblioteca {
         }
     }
 
-    public Boolean CheckoutMovie(String bookName) {
-        return false;
+    public Boolean CheckoutMovie(String movieName) throws IOException {
+        try {
+            Movie movie = FindMovieByName(movieName);
+            if (movie.getAvailable()) {
+                movie.setAvailable(false);
+                return true;
+            } else
+                return false;
+        } catch (IOException ex) {
+            throw ex;
+        }
     }
 
     public Boolean ReturnBook(String bookName) throws IOException {
@@ -43,6 +52,19 @@ public class Biblioteca {
             Book book = FindBookByName(bookName);
             if (!book.getAvailable()) {
                 book.setAvailable(true);
+                return true;
+            } else
+                return false;
+        } catch (IOException ex) {
+            throw ex;
+        }
+    }
+
+    public Boolean ReturnMovie(String movieName) throws IOException {
+        try {
+            Movie movie = FindMovieByName(movieName);
+            if (!movie.getAvailable()) {
+                movie.setAvailable(true);
                 return true;
             } else
                 return false;

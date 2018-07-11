@@ -35,6 +35,12 @@ public class BibliotecaApp {
         BibliotecaAppUI.ListBooks(books);
     }
 
+    private static void ListMovies() {
+        ArrayList<Movie> movies = biblioteca.getMovies();
+        BibliotecaAppUI.ListMoviesMessage();
+        BibliotecaAppUI.ListMovies(movies);
+    }
+
     private static void TryToCheckoutBook() {
         try {
             BibliotecaAppUI.CheckoutBookMessage();
@@ -46,6 +52,21 @@ public class BibliotecaApp {
                 BibliotecaAppUI.CheckoutBookFail(bookName);
         } catch (IOException ex) {
             System.out.println("We don't have this book.");
+        }
+
+    }
+
+    private static void TryToCheckoutMovie() {
+        try {
+            BibliotecaAppUI.CheckoutMovieMessage();
+            String movieName = BibliotecaAppUI.ReadMovieName();
+            Boolean success = biblioteca.CheckoutMovie(movieName);
+            if (success)
+                BibliotecaAppUI.CheckoutMovieSuccess(movieName);
+            else
+                BibliotecaAppUI.CheckoutMovieFail(movieName);
+        } catch (IOException ex) {
+            System.out.println("We don't have this movie.");
         }
 
     }
@@ -64,6 +85,20 @@ public class BibliotecaApp {
         }
     }
 
+    private static void TryToReturnMovie() {
+        try {
+            BibliotecaAppUI.ReturnMovieMessage();
+            String movieName = BibliotecaAppUI.ReadMovieName();
+            Boolean success = biblioteca.ReturnMovie(movieName);
+            if (success)
+                BibliotecaAppUI.ReturnMovieSuccess(movieName);
+            else
+                BibliotecaAppUI.ReturnMovieFail(movieName);
+        } catch (IOException ex) {
+            System.out.println("We don't have this movie.");
+        }
+    }
+
     private static void Quit() {
         BibliotecaAppUI.QuitMessage();
         available = false;
@@ -74,6 +109,9 @@ public class BibliotecaApp {
         options.put(1, BibliotecaApp::ListBooks);
         options.put(2, BibliotecaApp::TryToCheckoutBook);
         options.put(3, BibliotecaApp::TryToReturnBook);
+        options.put(4, BibliotecaApp::ListMovies);
+        options.put(5, BibliotecaApp::TryToCheckoutMovie);
+        options.put(6, BibliotecaApp::TryToReturnMovie);
         options.put(13, BibliotecaApp::Quit);
     }
 

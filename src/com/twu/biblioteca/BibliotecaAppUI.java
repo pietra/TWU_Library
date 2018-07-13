@@ -25,8 +25,22 @@ public class BibliotecaAppUI {
         System.out.println("*************************************");
     }
 
-    /* Book operations messages */
+    /* Login messages */
+    public static void LoginMessage() {
+        System.out.println();
+        System.out.println("Insira <library_number> + space + <password>: ");
+    }
 
+    public static void LoginSuccessMessage() {
+        System.out.println("You're logged in.");
+    }
+
+    public static void LoginFailedMessage(String reason) {
+        System.out.println("Ops, login failed: " + reason);
+    }
+
+
+    /* Book operations messages */
     public static void ListBooksMessage() {
         System.out.println("List of books");
     }
@@ -56,7 +70,6 @@ public class BibliotecaAppUI {
     }
 
     /* Movie operations messages */
-
     public static void ListMoviesMessage() {
         System.out.println("List of movies");
     }
@@ -102,6 +115,24 @@ public class BibliotecaAppUI {
     public static String ReadMovieName() {
         Scanner book = new Scanner(System.in);
         return book.nextLine();
+    }
+
+    public static String ReadLoginInformation() {
+        Scanner line = new Scanner(System.in);
+        return line.nextLine();
+    }
+
+    public static String[] ParseLoginInformation(String userInformation) {
+        String[] parsedUserInformation = new String[2];
+        String[] tokens = userInformation.split(" ");
+        parsedUserInformation[0] = tokens[0];
+        parsedUserInformation[1] = tokens[1];
+        return parsedUserInformation;
+    }
+
+    public static String[] ReadAndParseLoginInformation() {
+        String userInformation = ReadLoginInformation();
+        return ParseLoginInformation(userInformation);
     }
 
     public static void ListBooks(ArrayList<Book> books) {

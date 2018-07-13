@@ -8,13 +8,33 @@ import java.util.Map;
 public class BibliotecaApp {
 
     private static Biblioteca biblioteca = new Biblioteca();
+    private static LoginManager loginManager = new LoginManager();
     private static Boolean available;
     private static Map<Integer, Runnable> options = new HashMap<>();
 
     public static void main(String[] args) {
         InitializingMenu();
         BibliotecaAppUI.WelcomeMessage();
+        Login();
         Menu();
+    }
+
+    private static void Login() {
+        while (!available) {
+            try {
+                BibliotecaAppUI.LoginMessage();
+                String[] userInformation = BibliotecaAppUI.ReadAndParseLoginInformation();
+                loginManager.Login(userInformation[0], userInformation[1]);
+            } catch (IOException ex) {
+                BibliotecaAppUI.LoginFailedMessage("some information is wrong.");
+                continue;
+            } catch (IndexOutOfBoundsException ex) {
+                BibliotecaAppUI.LoginFailedMessage("some information is missing.");
+                continue;
+            }
+            available = true;
+        }
+        BibliotecaAppUI.LoginSuccessMessage();
     }
 
     private static void Menu() {
@@ -103,7 +123,7 @@ public class BibliotecaApp {
     }
 
     private static void InitializingMenu() {
-        available = true;
+        available = false;
         options.put(1, BibliotecaApp::ListBooks);
         options.put(2, BibliotecaApp::TryToCheckoutBook);
         options.put(3, BibliotecaApp::TryToReturnBook);

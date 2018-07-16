@@ -45,8 +45,11 @@ public class BibliotecaApp {
         }
     }
 
-    private static void RunMenuOption(int option) {
-        options.get(option).run();
+    public static void RunMenuOption(int option)  {
+        if(options.containsKey(option))
+            options.get(option).run();
+        else
+            System.out.println("Option not available.");
     }
 
     public static void ListBooks() {

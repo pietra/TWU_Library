@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -13,12 +14,17 @@ public class LoginManagerTest {
 
     LoginManager loginManager;
     Librarian user1;
+    Customer user2;
+    Address address;
 
     @Before
     public void setUp() {
         loginManager = new LoginManager();
         user1 = new Librarian("000-0003", "admin");
+        address = new Address("Brazil", "RS", "POA", "Av. Ipiranga", "0");
+        user2 = new Customer("Pietra", "pietra@pietra.com.br", address, "0800", "000-0004", "user");
         loginManager.AddUsers(user1);
+        loginManager.AddUsers(user2);
     }
 
     @After
@@ -33,7 +39,7 @@ public class LoginManagerTest {
 
     @Test(expected = IOException.class)
     public void FindUserByLibraryNumberThrowsException() throws IOException {
-        User user = loginManager.FindUserByLibraryNumber("000-0004");
+        User user = loginManager.FindUserByLibraryNumber("000-0005");
     }
 
     @Test
@@ -44,6 +50,18 @@ public class LoginManagerTest {
     @Test(expected = IOException.class)
     public void LoginWithUserThrowsException() throws IOException {
         loginManager.Login(user1.getLibraryNumber(), "wrongpassword");
+    }
+
+    @Test
+    public void ReturnMenuOptionsForLibrarian() throws IOException {
+        HashMap<Integer, Runnable> options = loginManager.Login(user1.getLibraryNumber(), user1.getPassword());
+        assertEquals(options.size(), 1);
+    }
+
+    @Test
+    public void ReturnMenuOptionsForCustomer() throws IOException {
+        HashMap<Integer, Runnable> options = loginManager.Login(user2.getLibraryNumber(), user2.getPassword());
+        assertEquals(options.size(), 6);
     }
 
 }

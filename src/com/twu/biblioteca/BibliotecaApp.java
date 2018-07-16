@@ -19,12 +19,12 @@ public class BibliotecaApp {
         Menu();
     }
 
-    private static void Login() {
+    public static void Login() {
         while (!available) {
             try {
                 BibliotecaAppUI.LoginMessage();
                 String[] userInformation = BibliotecaAppUI.ReadAndParseLoginInformation();
-                loginManager.Login(userInformation[0], userInformation[1]);
+                options = loginManager.Login(userInformation[0], userInformation[1]);
             } catch (IOException ex) {
                 BibliotecaAppUI.LoginFailedMessage("some information is wrong.");
                 continue;
@@ -37,7 +37,7 @@ public class BibliotecaApp {
         BibliotecaAppUI.LoginSuccessMessage();
     }
 
-    private static void Menu() {
+    public static void Menu() {
         while (available) {
             BibliotecaAppUI.MenuMessage();
             int option = BibliotecaAppUI.ReadInteger();
@@ -49,19 +49,19 @@ public class BibliotecaApp {
         options.get(option).run();
     }
 
-    private static void ListBooks() {
+    public static void ListBooks() {
         ArrayList<Book> books = biblioteca.getBooks();
         BibliotecaAppUI.ListBooksMessage();
         BibliotecaAppUI.ListBooks(books);
     }
 
-    private static void ListMovies() {
+    public static void ListMovies() {
         ArrayList<Movie> movies = biblioteca.getMovies();
         BibliotecaAppUI.ListMoviesMessage();
         BibliotecaAppUI.ListMovies(movies);
     }
 
-    private static void TryToCheckoutBook() {
+    public static void TryToCheckoutBook() {
         try {
             BibliotecaAppUI.CheckoutBookMessage();
             String bookName = BibliotecaAppUI.ReadBookName();
@@ -75,7 +75,7 @@ public class BibliotecaApp {
         }
     }
 
-    private static void TryToCheckoutMovie() {
+    public static void TryToCheckoutMovie() {
         try {
             BibliotecaAppUI.CheckoutMovieMessage();
             String movieName = BibliotecaAppUI.ReadMovieName();
@@ -89,7 +89,7 @@ public class BibliotecaApp {
         }
     }
 
-    private static void TryToReturnBook() {
+    public static void TryToReturnBook() {
         try {
             BibliotecaAppUI.ReturnBookMessage();
             String bookName = BibliotecaAppUI.ReadBookName();
@@ -103,7 +103,7 @@ public class BibliotecaApp {
         }
     }
 
-    private static void TryToReturnMovie() {
+    public static void TryToReturnMovie() {
         try {
             BibliotecaAppUI.ReturnMovieMessage();
             String movieName = BibliotecaAppUI.ReadMovieName();
@@ -124,12 +124,6 @@ public class BibliotecaApp {
 
     private static void InitializingMenu() {
         available = false;
-        options.put(1, BibliotecaApp::ListBooks);
-        options.put(2, BibliotecaApp::TryToCheckoutBook);
-        options.put(3, BibliotecaApp::TryToReturnBook);
-        options.put(4, BibliotecaApp::ListMovies);
-        options.put(5, BibliotecaApp::TryToCheckoutMovie);
-        options.put(6, BibliotecaApp::TryToReturnMovie);
         options.put(13, BibliotecaApp::Quit);
     }
 

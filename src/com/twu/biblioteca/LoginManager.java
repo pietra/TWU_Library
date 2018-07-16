@@ -2,22 +2,31 @@ package com.twu.biblioteca;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginManager {
 
     ArrayList<User> users = new ArrayList();
+    HashMap<Integer, Runnable> optionsForLibrarian = new HashMap();
+    HashMap<Integer, Runnable> optionsForCustomer = new HashMap();
 
     LoginManager() {
         InitializingUsers();
+        InitializingMenu();
     }
 
     public void AddUsers(User user) {
         users.add(user);
     }
 
-    public void Login(String libraryNumber, String password) throws IOException {
+    public HashMap<Integer, Runnable> Login(String libraryNumber, String password) throws IOException {
         User user = FindUserByLibraryNumber(libraryNumber);
         CheckLogin(user.getPassword(), password);
+
+        if (user instanceof Customer)
+            return optionsForCustomer;
+
+        return optionsForLibrarian;
     }
 
     private void CheckLogin(String password, String passwordGiven) throws IOException {
@@ -32,6 +41,16 @@ public class LoginManager {
             }
         }
         throw new IOException("This user doesn't exist.");
+    }
+
+    private void InitializingMenu() {
+        optionsForCustomer.put(2, BibliotecaApp::ListBooks);
+        optionsForCustomer.put(3, BibliotecaApp::TryToCheckoutBook);
+        optionsForCustomer.put(4, BibliotecaApp::TryToReturnBook);
+        optionsForCustomer.put(5, BibliotecaApp::ListMovies);
+        optionsForCustomer.put(6, BibliotecaApp::TryToCheckoutMovie);
+        optionsForCustomer.put(7, BibliotecaApp::TryToReturnMovie);
+        optionsForLibrarian.put(1, BibliotecaApp::ListBooks);
     }
 
     private void InitializingUsers() {

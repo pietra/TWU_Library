@@ -44,7 +44,7 @@ public class LoginManager {
     }
 
     private void InitializingMenu() {
-        optionsForCustomer.put(2, BibliotecaApp::ListBooks);
+        optionsForCustomer.put(1, BibliotecaApp::ListBooks);
         optionsForCustomer.put(3, BibliotecaApp::TryToCheckoutBook);
         optionsForCustomer.put(4, BibliotecaApp::TryToReturnBook);
         optionsForCustomer.put(5, BibliotecaApp::ListMovies);

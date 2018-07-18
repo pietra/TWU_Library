@@ -75,6 +75,12 @@ public class BibliotecaTest {
     }
 
     @Test
+    public void TestBooksCheckedOutWhenNoneBookWasCheckedOut() {
+        ArrayList<Book> booksCheckedOut = new ArrayList<>();
+        assertEquals(booksCheckedOut, biblioteca.BooksCheckedOut());
+    }
+
+    @Test
     public void TestBooksCheckedOut() {
         ArrayList<Book> booksCheckedOut = new ArrayList<>();
         book.setAvailable(false);

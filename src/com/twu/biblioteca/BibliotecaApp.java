@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,12 +42,18 @@ public class BibliotecaApp {
         while (available) {
             BibliotecaAppUI.MenuMessage();
             int option = BibliotecaAppUI.ReadInteger();
+
+            if (option == 13) {
+                Quit();
+                continue;
+            }
+
             RunMenuOption(option);
         }
     }
 
-    public static void RunMenuOption(int option)  {
-        if(options.containsKey(option))
+    public static void RunMenuOption(int option) {
+        if (options.containsKey(option))
             options.get(option).run();
         else
             System.out.println("Option not available.");
@@ -120,6 +127,12 @@ public class BibliotecaApp {
         }
     }
 
+    public static void ListBooksCheckedOut() {
+        ArrayList<Book> checkedOutBooks = biblioteca.BooksCheckedOut();
+        BibliotecaAppUI.ListBooksCheckedOutMessage();
+        BibliotecaAppUI.ListBooksCheckedOutAndWhoDid(checkedOutBooks);
+    }
+
     private static void Quit() {
         BibliotecaAppUI.QuitMessage();
         available = false;
@@ -127,7 +140,6 @@ public class BibliotecaApp {
 
     private static void InitializingMenu() {
         available = false;
-        options.put(13, BibliotecaApp::Quit);
     }
 
 }

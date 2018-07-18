@@ -50,7 +50,7 @@ public class LoginManager {
         optionsForCustomer.put(5, BibliotecaApp::ListMovies);
         optionsForCustomer.put(6, BibliotecaApp::TryToCheckoutMovie);
         optionsForCustomer.put(7, BibliotecaApp::TryToReturnMovie);
-        optionsForLibrarian.put(1, BibliotecaApp::ListBooks);
+        optionsForLibrarian.put(1, BibliotecaApp::ListBooksCheckedOut);
     }
 
     private void InitializingUsers() {

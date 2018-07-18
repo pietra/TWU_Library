@@ -26,11 +26,11 @@ public class Customer extends User {
 
     private void InitializingMenu() {
         options.put(1, BibliotecaApp::ListBooks);
-        options.put(3, BibliotecaApp::TryToCheckoutBook);
-        options.put(4, BibliotecaApp::TryToReturnBook);
-        options.put(5, BibliotecaApp::ListMovies);
-        options.put(6, BibliotecaApp::TryToCheckoutMovie);
-        options.put(7, BibliotecaApp::TryToReturnMovie);
+        options.put(2, BibliotecaApp::TryToCheckoutBook);
+        options.put(3, BibliotecaApp::TryToReturnBook);
+        options.put(4, BibliotecaApp::ListMovies);
+        options.put(5, BibliotecaApp::TryToCheckoutMovie);
+        options.put(6, BibliotecaApp::TryToReturnMovie);
     }
 
 }

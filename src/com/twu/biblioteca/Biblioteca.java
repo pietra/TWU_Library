@@ -3,11 +3,13 @@ package com.twu.biblioteca;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Biblioteca {
 
     private ArrayList<Book> books = new ArrayList();
     private ArrayList<Movie> movies = new ArrayList<>();
+    private HashMap<Book, User> checkedoutBooks = new HashMap<>();
 
     Biblioteca() {
         InitializingLibraryBooks();
@@ -22,11 +24,11 @@ public class Biblioteca {
         return movies;
     }
 
-    public Boolean CheckoutBook(String bookName) throws IOException {
+    public Boolean CheckoutBook(String bookName, User user) throws IOException {
         try {
             Book book = FindBookByName(bookName);
-            if (book.getAvailable()) {
-                book.setAvailable(false);
+            if (!checkedoutBooks.containsKey(book)) {
+                checkedoutBooks.put(book, user);
                 return true;
             } else
                 return false;
@@ -51,8 +53,8 @@ public class Biblioteca {
     public Boolean ReturnBook(String bookName) throws IOException {
         try {
             Book book = FindBookByName(bookName);
-            if (!book.getAvailable()) {
-                book.setAvailable(true);
+            if (checkedoutBooks.containsKey(book)) {
+                checkedoutBooks.remove(book);
                 return true;
             } else
                 return false;

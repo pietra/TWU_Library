@@ -89,7 +89,7 @@ public class BibliotecaApp {
         try {
             BibliotecaAppUI.CheckoutBookMessage();
             String bookName = BibliotecaAppUI.ReadBookName();
-            Boolean success = biblioteca.CheckoutBook(bookName);
+            Boolean success = biblioteca.CheckoutBook(bookName, user);
             if (success)
                 BibliotecaAppUI.CheckoutBookSuccess(bookName);
             else

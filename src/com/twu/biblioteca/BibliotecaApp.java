@@ -11,6 +11,7 @@ public class BibliotecaApp {
     private static Biblioteca biblioteca = new Biblioteca();
     private static LoginManager loginManager = new LoginManager();
     private static Boolean available;
+    private static User user;
     private static Map<Integer, Runnable> options = new HashMap<>();
 
     public static void main(String[] args) {
@@ -25,7 +26,15 @@ public class BibliotecaApp {
             try {
                 BibliotecaAppUI.LoginMessage();
                 String[] userInformation = BibliotecaAppUI.ReadAndParseLoginInformation();
-                options = loginManager.Login(userInformation[0], userInformation[1]);
+                user = loginManager.Login(userInformation[0], userInformation[1]);
+
+                if (user instanceof Customer) {
+                    Customer customer = (Customer) user;
+                    options = customer.getOptions();
+                } else {
+                    Librarian librarian = (Librarian) user;
+                    options = librarian.getOptions();
+                }
             } catch (IOException ex) {
                 BibliotecaAppUI.LoginFailedMessage("some information is wrong.");
                 continue;
@@ -40,7 +49,12 @@ public class BibliotecaApp {
 
     public static void Menu() {
         while (available) {
-            BibliotecaAppUI.MenuMessage();
+
+            if (user instanceof Customer)
+                BibliotecaAppUI.MenuMessageCustomer();
+            else
+                BibliotecaAppUI.MenuMessageLibrarian();
+
             int option = BibliotecaAppUI.ReadInteger();
 
             if (option == 13) {

@@ -52,16 +52,4 @@ public class LoginManagerTest {
         loginManager.Login(user1.getLibraryNumber(), "wrongpassword");
     }
 
-    @Test
-    public void ReturnMenuOptionsForLibrarian() throws IOException {
-        HashMap<Integer, Runnable> options = loginManager.Login(user1.getLibraryNumber(), user1.getPassword());
-        assertEquals(options.size(), 1);
-    }
-
-    @Test
-    public void ReturnMenuOptionsForCustomer() throws IOException {
-        HashMap<Integer, Runnable> options = loginManager.Login(user2.getLibraryNumber(), user2.getPassword());
-        assertEquals(options.size(), 6);
-    }
-
 }

@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +12,7 @@ public class BibliotecaAppUI {
         System.out.println("*************************************");
     }
 
-    public static void MenuMessage() {
+    public static void MenuMessageCustomer() {
         System.out.println();
         System.out.println("***** Menu Options For Customer *****");
         System.out.println("            List Books - 1           ");
@@ -23,6 +22,10 @@ public class BibliotecaAppUI {
         System.out.println("          Check out movie - 5        ");
         System.out.println("            Return movie - 6         ");
         System.out.println("              Quit - 13              ");
+        System.out.println("*************************************");
+    }
+
+    public static void MenuMessageLibrarian() {
         System.out.println();
         System.out.println("***** Menu Options For Librarian ****");
         System.out.println("      List books checked out - 1     ");

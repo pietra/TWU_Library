@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,13 +15,17 @@ public class BibliotecaAppUI {
 
     public static void MenuMessage() {
         System.out.println();
-        System.out.println("************ Menu Options ***********");
+        System.out.println("***** Menu Options For Customer *****");
         System.out.println("            List Books - 1           ");
         System.out.println("          Check out book - 2         ");
         System.out.println("            Return book - 3          ");
-        System.out.println("            List Movies - 4           ");
-        System.out.println("          Check out movie - 5         ");
-        System.out.println("            Return movie - 6          ");
+        System.out.println("            List Movies - 4          ");
+        System.out.println("          Check out movie - 5        ");
+        System.out.println("            Return movie - 6         ");
+        System.out.println("              Quit - 13              ");
+        System.out.println();
+        System.out.println("***** Menu Options For Librarian ****");
+        System.out.println("      List books checked out - 1     ");
         System.out.println("              Quit - 13              ");
         System.out.println("*************************************");
     }
@@ -155,6 +160,16 @@ public class BibliotecaAppUI {
                 System.out.print(movie.getRating());
                 System.out.println();
             }
+        }
+    }
+
+    public static void ListBooksCheckedOutMessage() {
+        System.out.println("Books checked out: ");
+    }
+
+    public static void ListBooksCheckedOutAndWhoDid(ArrayList<Book> booksCheckedOut) {
+        for (Book book : booksCheckedOut) {
+            System.out.println("Book name: " + book.getName());
         }
     }
 

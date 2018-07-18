@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Biblioteca {
@@ -91,6 +92,14 @@ public class Biblioteca {
         throw new IOException("We don't have this movie.");
     }
 
+    public ArrayList<Book> BooksCheckedOut() {
+        ArrayList<Book> booksCheckOut = new ArrayList<>();
+        for (Book book : books) {
+            if (!book.getAvailable())
+                booksCheckOut.add(book);
+        }
+        return booksCheckOut;
+    }
 
     public void AddBook(Book book) {
         books.add(book);

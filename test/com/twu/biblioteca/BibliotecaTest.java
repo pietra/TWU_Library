@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -70,6 +72,14 @@ public class BibliotecaTest {
         book.setAvailable(false);
         biblioteca.ReturnBook("Test");
         Assert.assertTrue(book.getAvailable());
+    }
+
+    @Test
+    public void TestBooksCheckedOut() {
+        ArrayList<Book> booksCheckedOut = new ArrayList<>();
+        book.setAvailable(false);
+        booksCheckedOut.add(book);
+        assertEquals(booksCheckedOut, biblioteca.BooksCheckedOut());
     }
 
     @Test
